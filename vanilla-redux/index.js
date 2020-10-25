@@ -1,7 +1,12 @@
+import { createStore } from './node_modules/redux';
+
 const divToggle = document.querySelector(".toggle");
-const counter = document.querySelector('h1');
+const counter = document.querySelector('h2');
 const btnIncrease = document.querySelector("#increase");
 const btnDecrease = document.querySelector("#decrease");
+
+console.log(btnIncrease);
+console.log(btnDecrease);
 
 // action = 상태에 변화를 일으키는 것
 const TOGGLE_SWITCH = 'TOGGLE_SWITCH';
@@ -30,7 +35,7 @@ function reducer (state = initialState, action) {
         case INCREASE:
             return {
                 ...state,
-                counter: state.counter + ction.differencea
+                counter: state.counter + acction.differencea
             };
         case DECREASE:
             return {
@@ -42,3 +47,39 @@ function reducer (state = initialState, action) {
     }
 }
 
+// 스토어 만들기
+const store = createStore(reducer);
+
+// render 함수 만들기, 상태가 업데이트될 때마다 호출
+// html을 사용하여 만들어진 UI 속성을 상태에 따라 변경해줌
+const render = () => {
+    const state = store.getState();
+
+    // 토글 처리
+    if(state.toggle) {
+        divToggle.classList.add('active');
+    } else {
+        divToggle.classList.remove('active');
+    }
+    // 카운터 처리
+    counter.innerText = state.counter;
+}
+
+render();
+// 구독하기, store 상태가 바뀔때마다 render 함수 호출되도록
+// store 내장함수 subscribe, 인자로 함수 형태의 값을 전달
+store.subscribe(render);
+
+
+// dispatch, 액션 발생시키기, 인자는 액션 객체로
+// 이벤트 함수 내부에서는 dispatch 함수를 사용해 액션을 스토어에게 전달
+divToggle.onClick = () => {
+    store.dispatch(toggleSwitch());
+};
+btnIncrease.onClick = () => {
+    store.dispatch(increase(1));
+}
+btnDecrease.onClick = () => {
+    alert(100);
+    store.dispatch(decrease());
+}
