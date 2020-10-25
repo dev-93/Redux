@@ -1,12 +1,9 @@
-import { createStore } from './node_modules/redux';
+import {createStore} from 'redux';
 
 const divToggle = document.querySelector(".toggle");
 const counter = document.querySelector('h2');
 const btnIncrease = document.querySelector("#increase");
 const btnDecrease = document.querySelector("#decrease");
-
-console.log(btnIncrease);
-console.log(btnDecrease);
 
 // action = 상태에 변화를 일으키는 것
 const TOGGLE_SWITCH = 'TOGGLE_SWITCH';
