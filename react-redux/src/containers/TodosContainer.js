@@ -1,7 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import Todos from "../components/Todos";
-import { changeInput, insert, toggle, remove } from "../modules/counter";
+import { changeInput, insert, toggle, remove } from "../modules/todos";
+
 const TodosContainer = ({ input, todos, changeInput, insert, toggle, remove }) => {
     return (
         <Todos
